@@ -1,0 +1,476 @@
+<div class="container-fluid main-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Tasks</div>
+        <div class="panel-body">
+          <button class="btn btn-primary btn-lg field-button" data-toggle="modal" data-target="#reconModal" ng-click="fCtrl.reconArea()">Recon Area</button>
+          <button class="btn btn-primary btn-lg field-button" data-toggle="modal" data-target="#mwModal">Most Wanted List</button>
+          <button class="btn btn-primary btn-lg field-button" data-toggle="modal" data-target="#backgroundModal">Background Check</button>
+          <button class="btn btn-primary btn-lg field-button" data-toggle="modal" data-target="#lookupModal">Incident Lookup</button>
+          <button class="btn btn-primary btn-lg field-button" data-toggle="modal" data-target="#fileModal">File Incident</button>
+          <button class="btn btn-primary btn-lg field-button" data-toggle="modal" data-target="#propertyModal">Property Crime</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recon Modal -->
+  <div class="modal fade" id="reconModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" id="reconModalInner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="reconModalLabel">Recon Area (Incidents within 5 miles)</h4>
+        </div>
+        <div class="modal-body">
+          <div id="recon-map"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HVT Modal -->
+  <div class="modal fade" id="mwModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" id="mwModalInner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mwModalLabel">Most Wanted List</h4>
+        </div>
+        <div class="modal-body">
+          <div id="most-wanted-carousel" class="carousel slide" data-ride="carousel">
+
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item text-center" ng-class="{active:$first}" ng-repeat="person in fCtrl.mostWanted">
+                <img class="mw-image" ng-src="{{person.image}}" alt="...">
+                <div class="carousel-caption">
+                  <h2><b>{{person.first_name}} {{person.last_name}}</b></h2>
+                  <p><b>{{person.gender}} | {{person.height}} | {{person.weight}} | {{person.race}}</b></p>
+                  <p><b>{{person.last_seen}}</b></p>
+                </div>
+              </div>
+              ...
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" data-target="#most-wanted-carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" data-target="#most-wanted-carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Check Modal -->
+  <div class="modal fade" id="backgroundModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" id="backgroundModalInner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="backgroundModalLabel">Background Check</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label" for="inputDefault">First Name</label>
+            <input type="text" class="form-control" id="inputBackgroundFirstName" ng-model="fCtrl.backgroundFirstName">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="inputDefault">Last Name</label>
+            <input type="text" class="form-control" id="inputBackgroundLastName" ng-model="fCtrl.backgroundLastName">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="inputDefault">DOB</label>
+            <input type="text" class="form-control" id="inputBackgroundDOB" ng-model="fCtrl.backgroundDOB">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Incident Lookup Modal -->
+  <div class="modal fade" id="lookupModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" id="lookupModalInner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="lookupModalLabel">Incident Lookup</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-dismissible alert-danger" ng-if="fCtrl.showMissingAlert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <p>Please enter search criteria.</p>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="inputDefault">Offender Name</label>
+            <input type="text" class="form-control" id="inputFieldOffenderName" ng-model="fCtrl.fieldOffenderName">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="inputDefault">Incident Address</label>
+            <input type="text" class="form-control" id="inputFieldIncidentAddress" ng-model="fCtrl.fieldIncidentAddress">
+          </div>
+
+          <div class="panel panel-primary" ng-if="fCtrl.showFoundIncidents">
+            <div class="panel-heading">
+              <h3 class="panel-title">Search Results</h3>
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <td>Incident Type</td><td>Incident Date</td><td>Incident Address</td>
+                      <td>Offender Name</td><td>Offender Age</td><td>Offender Gender</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="incident in fCtrl.foundIncidents">
+                      <td>{{incident.incident_type}}</td><td>{{incident.incident_date}}</td><td>{{incident.street_address}}</td>
+                      <td>{{incident.offender_name}}</td><td>{{incident.offender_age}}</td><td>{{incident.offender_gender}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-warning btn-sm" ng-click="fCtrl.foundIncidents = [];fCtrl.showFoundIncidents = false;">Clear Results</button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="fCtrl.findIncidents()">Show Results</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- File Incident Modal -->
+  <div class="modal fade" id="fileModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" id="fileModalInner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fileModalLabel">File Incident</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Incident Type</label>
+                <div class="col-lg-10">
+                  <select class="form-control" id="select">
+                    <option>Battery</option>
+                    <option>Theft</option>
+                    <option>Narcotics</option>
+                    <option>Criminal Damage</option>
+                    <option>Murder</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputTime" class="col-lg-2 control-label">Incident Time</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputTime" placeholder="xx:xx (24hr)">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputDate" class="col-lg-2 control-label">Incident Date</label>
+                <div class="col-lg-10">
+                  <input type="date" class="form-control" id="inputDate"  max="{{fCtrl.todaysDate | date:'yyyy-MM-dd'}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputAddress" class="col-lg-2 control-label">Incident Address</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 S Main St Boulder, CO 80303">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputOffenderName" class="col-lg-2 control-label">Offender Name</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputOffenderName" placeholder="Jones">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Offender Age</label>
+                <div class="col-lg-10">
+                  <select class="form-control" id="inputOffenderAge">
+                    <option ng-repeat="num in fCtrl.getNumber(fCtrl.number)">{{num + 1}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Offender Gender</label>
+                <div class="col-lg-10">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="offenderGender" id="optionsRadios1" value="male" checked="checked">
+                      Male
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="offenderGender" id="optionsRadios2" value="female">
+                      Female
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputOffenderRace" class="col-lg-2 control-label">Offender Race</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputOffenderRace" placeholder="Bangledeshi">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputOfficerName" class="col-lg-2 control-label">Officer Name</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputOfficerName" placeholder="Jones">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Officer Age</label>
+                <div class="col-lg-10">
+                  <select class="form-control" id="inputOfficerAge">
+                    <option ng-repeat="num in fCtrl.getNumber(fCtrl.number)">{{num + 1}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Officer Gender</label>
+                <div class="col-lg-10">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="officerGender" id="optionsRadios1" value="male" checked="checked">
+                      Male
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="officerGender" id="optionsRadios2" value="female">
+                      Female
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputOfficerRace" class="col-lg-2 control-label">Officer Race</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputOfficerRace" placeholder="Bangledeshi">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <button type="reset" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Propery Crime Modal -->
+  <div class="modal fade" id="propertyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" id="propertyModalInner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="propertyModalLabel">Property Crime Investigation</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="panel panel-primary">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseCrimeScene" ng-click="crimeSceneIsCollapsed=!crimeSceneIsCollapsed">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-plus-sign" ng-if="crimeSceneIsCollapsed"></span>
+                <span class="glyphicon glyphicon-minus-sign" ng-if="!crimeSceneIsCollapsed"></span>
+                CrimeScene
+              </h3>
+            </div>
+            <div class="panel-body collapse in" id="collapseCrimeScene">
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputSceneDetails" placeholder="Scene Details">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseWitnesses" ng-click="witnessIsCollapsed=!witnessIsCollapsed">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-plus-sign" ng-if="!witnessIsCollapsed"></span>
+                <span class="glyphicon glyphicon-minus-sign" ng-if="witnessIsCollapsed"></span>
+                Witnesses
+              </h3>
+            </div>
+            <div class="panel-body collapse" id="collapseWitnesses">
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputWitnessName" placeholder="Name">
+              </div>
+              <div class="form-group">
+              <input type="text" class="form-control" id="inputWitnessStatement" placeholder="Statement">
+              </div>
+              <button class="btn btn-primary btn-sm pull-right"><span class="glyphicon glyphicon-plus-sign"></span></button>
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseSuspect" ng-click="suspectIsCollapsed=!suspectIsCollapsed">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-plus-sign" ng-if="!suspectIsCollapsed"></span>
+                <span class="glyphicon glyphicon-minus-sign" ng-if="suspectIsCollapsed"></span>
+                Suspect
+              </h3>
+            </div>
+            <div class="panel-body collapse" id="collapseSuspect">
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputSuspectName" placeholder="Suspect Name">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputSuspectDescription" placeholder="Suspect Description">
+              </div>
+              <button class="btn btn-primary btn-sm pull-right"><span class="glyphicon glyphicon-plus-sign"></span></button>
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseEEF" ng-click="eefIsCollapsed=!eefIsCollapsed">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-plus-sign" ng-if="!eefIsCollapsed"></span>
+                <span class="glyphicon glyphicon-minus-sign" ng-if="eefIsCollapsed"></span>
+                Entry, Exit and Flight
+              </h3>
+            </div>
+            <div class="panel-body collapse" id="collapseEEF">
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputEEF" placeholder="Entry, exit or flight paths">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseForceUsed" ng-click="forceUsedIsCollapsed=!forceUsedIsCollapsed">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-plus-sign" ng-if="!forceUsedIsCollapsed"></span>
+                <span class="glyphicon glyphicon-minus-sign" ng-if="forceUsedIsCollapsed"></span>
+                Force Used
+              </h3>
+            </div>
+            <div class="panel-body collapse" id="collapseForceUsed">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="forceUsed"> Force Used
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputForceUsed" placeholder="Force description" ng-if="forceUsed">
+              </div>
+              <div class="checkbox" ng-show="forceUsed">
+                <label>
+                  <input type="checkbox"> Tools Used
+                </label>
+              </div>
+              <div class="checkbox" ng-show="forceUsed">
+                <label>
+                  <input type="checkbox" ng-model="brokenGlass"> Broken Glass
+                </label>
+              </div>
+              <div class="checkbox" ng-if="brokenGlass">
+                <label>
+                  <input type="checkbox"> DNA Collected
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputGlassLocation" placeholder="Glass location" ng-if="brokenGlass">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseStolenOrDamaged" ng-click="stolenOrDamagedIsCollapsed=!stolenOrDamagedIsCollapsed">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-plus-sign" ng-if="!stolenOrDamagedIsCollapsed"></span>
+                <span class="glyphicon glyphicon-minus-sign" ng-if="stolenOrDamagedIsCollapsed"></span>
+                Stolen / Damaged Property
+              </h3>
+            </div>
+            <div class="panel-body collapse" id="collapseStolenOrDamaged">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="stolenProperty"> Stolen Property
+                </label>
+              </div>
+              <div class="form-group" ng-if="stolenProperty">
+                <input type="text" class="form-control" id="inputStolenSerial" placeholder="Serial #">
+              </div>
+              <div class="form-group" ng-if="stolenProperty">
+                <input type="text" class="form-control" id="inputStolenValue" placeholder="Value">
+              </div>
+              <div class="form-group" ng-if="stolenProperty">
+                <input type="text" class="form-control" id="inputStolenDescription" placeholder="Description">
+              </div>
+              <button class="btn btn-primary btn-sm" ng-if="stolenProperty"><span class="glyphicon glyphicon-plus-sign"></span></button>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="damagedProperty"> Damaged Property
+                </label>
+              </div>
+              <div class="form-group" ng-if="damagedProperty">
+                <label class="control-label" >Capture Image</label>
+                <input type="file" accept="image/*;capture=camera">
+                <button class="btn btn-primary btn-sm pull-right" ng-if="damagedProperty"><span class="glyphicon glyphicon-plus-sign"></span></button>
+              </div>
+              <div class="form-group" ng-if="damagedProperty">
+                <input type="text" class="form-control" id="inputDamagedSerial" placeholder="Serial #">
+              </div>
+              <div class="form-group" ng-if="damagedProperty">
+                <input type="text" class="form-control" id="inputDamagedValue" placeholder="Value">
+              </div>
+              <div class="form-group" ng-if="damagedProperty">
+                <input type="text" class="form-control" id="inputDamagedDescription" placeholder="Description">
+              </div>
+                <button class="btn btn-primary btn-sm" ng-if="damagedProperty"><span class="glyphicon glyphicon-plus-sign"></span></button>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

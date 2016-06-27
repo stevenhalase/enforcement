@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="enforcementApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Enforcement - Crime Visualized</title>
+
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
+    <script src="bower_components/chartist/dist/chartist.min.js" charset="utf-8"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="spin.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiZxO34DATiEafQs2BOxuIS_T-UhAQ81U"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyAiZxO34DATiEafQs2BOxuIS_T-UhAQ81U"></script> -->
+    <script src="gmaps.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="app.css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,700italic' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-controller="navCtrl as nCtrl">
+
+    <span class="outer-wrapper">
+      <nav class="navbar navbar-default hover-color">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <img src="images/badge2.svg" class="pull-left" id="logo">
+          <a class="navbar-brand" id="brand">{{nCtrl.appName}}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: link.isActive}" ng-repeat="link in nCtrl.links"><a ui-sref="{{link.name.toLowerCase()}}" ng-click="nCtrl.changeActive(link)">{{link.name}}</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <p class="user-name text-primary">{{nCtrl.user.email}}</p>
+            <button class="btn btn-default" ui-sref="login" ng-click="nCtrl.signOut()">Sign Out</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+    </span>
+
+
+    <ui-view></ui-view>
+
+    <span class="outer-wrapper">
+      <div class="container-fluid footer">
+        <div class="row panel panel-default well well-sm footer">
+          <div class="col-md-4" ng-repeat="link in nCtrl.footerLinks">
+            <p><b>{{link.name}}</b></p>
+            <a href="#" ng-repeat="innerLink in link.links"><p>{{innerLink.linkName}}</p></a>
+          </div>
+        </div>
+      </div>
+    </span>
+
+
+    <script src="app.js" charset="utf-8"></script>
+    <script src="controllers/login-controller.js" charset="utf-8"></script>
+    <script src="controllers/home-controller.js" charset="utf-8"></script>
+    <script src="controllers/incidents-controller.js" charset="utf-8"></script>
+    <script src="controllers/nav-controller.js" charset="utf-8"></script>
+    <script src="controllers/doj-controller.js" charset="utf-8"></script>
+    <script src="controllers/crime-map-controller.js" charset="utf-8"></script>
+    <script src="controllers/field-controller.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<div class="container-fluid main-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body jumbotron">
+          <div class="col-lg-4">
+            <h1 id="app-title">Enforcement</h1>
+            <p>Making Incident Tracking Efficient</p>
+            <button ui-sref="incidents" class="btn btn-primary btn-lg incident-link" ng-click="nCtrl.changeActive(nCtrl.links[2])">See Incidents</button>
+          </div>
+          <div class="col-lg-2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Incidents This Month</h3>
+              </div>
+              <div class="panel-body">
+                <h1 class="text-center">{{hCtrl.numIncidentsThisMonth}}</h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Arrests This Month</h3>
+              </div>
+              <div class="panel-body">
+                <h1 class="text-center">{{hCtrl.numArrestsThisMonth}}</h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Most Dangerous TOD</h3>
+              </div>
+              <div class="panel-body">
+                <h1 class="text-center">{{hCtrl.mostDangerousTOD}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 chart-container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Month Overview (Last 30 Days)
+        </div>
+        <div class="table-responsive chart-responsive">
+          <div class="panel-body chart">
+            <span class="line-legend wine pull-right"></span><span class="pull-right legend">Arrests</span>
+            <span class="line-legend blue pull-right"></span><span class="pull-right legend">Incidents</span>
+            <br/><hr id="chart-hr"/>
+            <div class="ct-chart ct-perfect-fourth chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Map Overview (Last 30 Days)
+        </div>
+        <div class="panel-body">
+          <span class="line-legend murder pull-right"></span><span class="pull-right legend">Murder</span>
+          <span class="line-legend battery pull-right"></span><span class="pull-right legend">Battery</span>
+          <span class="line-legend criminal-damage pull-right"></span><span class="pull-right legend">Criminal Damage</span>
+          <span class="line-legend narcotics pull-right"></span><span class="pull-right legend">Narcotics</span>
+          <span class="line-legend theft pull-right"></span><span class="pull-right legend">Theft</span>
+          <br/><hr/>
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

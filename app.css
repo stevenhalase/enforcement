@@ -1,0 +1,289 @@
+.wrapper {
+  width: 100%;
+}
+
+body {
+}
+
+.main-wrapper {
+  position: relative;
+  padding: 15px;
+  margin: 15px;
+  background-color: #fff;
+  /*background-image: url('images/law-enforcement.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;*/
+}
+
+#logo {
+  width: 40px;
+  margin-top: 12px;
+  margin-left: 5px;
+}
+
+#login-logo {
+  width: 40px;
+  margin-top: -5px;
+}
+
+@media (max-width: 393px) {
+  #login-logo {
+    display: none;
+  }
+}
+
+#app-title {
+  margin-bottom: 0px;
+}
+
+#brand {
+  padding-left: 5px;
+}
+
+#app-title {
+  font-weight: 900;
+}
+
+@media (max-width: 1260px) {
+  #app-title {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 450px) {
+  #app-title {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 340px) {
+  #app-title {
+    font-size: 30px;
+  }
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+#text-overlay-h1 {
+  position: absolute;
+  top: 85%;
+  left: 10%;
+}
+
+#text-overlay-p {
+  position: absolute;
+  top: 85%;
+  left: 10%;
+}
+
+#header-go {
+  position: absolute;
+  top: 85%;
+  left: 10%;
+}
+
+#incidents-search {
+  width: 200px;
+  display: inline-block;
+}
+
+#addIncidentButton {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.table-nav {
+  margin: 10px;
+}
+
+.search-panel {
+  width: 25%;
+}
+
+.btn-group {
+  margin: 20px;
+}
+
+.list-group-item.active {
+  padding: 5px 0 5px 15px;
+}
+
+.footer {
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#incidentModalInner {
+  width: 95%;
+}
+
+.container-modal {
+  position: relative;
+}
+
+#loginModal {
+  background-image: url('images/law-enforcement.jpg');
+  background-size: cover;
+  background-color: rgba(0,0,0,0.7);
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+#loginModalDialog {
+  position: fixed;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  width: 75%;
+}
+
+.incident-link {
+  margin: 0 0 10px 0;
+}
+
+#chart-hr {
+  margin-bottom: 10px;
+}
+
+.chart-container {
+  height: 410px;
+}
+
+.chart-responsive {
+  height: 340px;
+  overflow-y:hidden;
+}
+
+.chart.panel-body {
+}
+
+.ct-chart.chart {
+}
+
+.chart {
+  height: 325px;
+}
+
+.ct-series-a .ct-line{
+  stroke: #13b4ff;
+  area: #13b4ff;
+}
+
+.ct-series-b .ct-line{
+  stroke: #ae163e;
+}
+
+.line-legend {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.legend {
+  padding: 3px;
+}
+
+.blue {
+  background: #13b4ff;
+}
+
+.wine {
+  background: #ae163e;
+}
+
+.murder {
+  background: #3b4043;
+}
+
+.battery {
+  background: #d94e59;
+}
+
+.criminal-damage {
+  background: #ffad00;
+}
+
+.narcotics {
+  background: #58ac45;
+}
+
+.theft {
+  background: #5796cf;
+}
+
+#map {
+  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 300px;
+}
+
+#panorama {
+  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 250px;
+}
+
+.user-name {
+  display: inline;
+  padding-right: 15px;
+}
+
+.field-button {
+  width: 100%;
+  margin: 5px;
+}
+
+#recon-map {
+  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 300px;
+}
+
+#reconModalInner {
+  width: 95%;
+}
+
+#mwModalInner {
+  width: 95%;
+}
+
+
+#lookupModalInner {
+  width: 95%;
+}
+
+
+#fileModalInner {
+  width: 95%;
+}
+
+#propertyModalInner {
+  width: 95%;
+}
+
+#propertyModalInner .panel {
+  margin-bottom: 5px;
+}
+
+#mwModalInner .modal-body {
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+  margin: 0 auto;
+  width: 500px;
+  height: 300px;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+#brand {
+  font-weight: 900;
+}

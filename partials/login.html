@@ -1,0 +1,26 @@
+
+<div class="modal fade in" id="loginModal">
+  <div class="modal-dialog" id="loginModalDialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <img src="images/badge2.svg" id="login-logo">
+          <b>Enforcement</b> | Login</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="control-label" for="loginUser">Username</label>
+          <input class="form-control" id="loginUser" type="text">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="loginPassword">Password</label>
+          <input class="form-control" id="loginPassword" type="password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal"><span class="glyphicon glyphicon-wrench"></span></button>
+        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" ng-click="nCtrl.isLoggedIn=true;nCtrl.loggingIn();lCtrl.signInUser()">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
